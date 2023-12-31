@@ -17,15 +17,15 @@ namespace CadastroAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IEnumerable<Usuario> GetAll()
         {
-            using (var sqlConnectin = new SqlConnection(_connectionString))
+            using (var sqlConnection = new SqlConnection(_connectionString))
             {
-                const string sql = "SELECT * FROM Usuarios";
+                const string sql = "SELECT * FROM Usuario";
 
-                var usuarios = await sqlConnectin.QueryAsync<UsuarioModel>(sql);
-
-                return Ok(usuarios);
+                var usuarios = sqlConnection.Query<Usuario>(sql);
+                
+                return usuarios;
             }
         }
     }
