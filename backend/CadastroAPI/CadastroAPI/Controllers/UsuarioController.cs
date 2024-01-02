@@ -1,12 +1,13 @@
 ﻿using CadastroAPI.Entities;
 using CadastroAPI.Models;
 using CadastroAPI.Repository;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace CadastroAPI.Controllers
 {
     [ApiController]
+    [EnableCors("OpenCORSPolicy")]
     [Route("[controller]")]
     public class UsuarioController : Controller
     {
