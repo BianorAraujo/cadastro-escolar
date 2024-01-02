@@ -1,4 +1,5 @@
 ﻿using CadastroAPI.Models;
+using CadastroAPI.Repository;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
@@ -9,24 +10,19 @@ namespace CadastroAPI.Controllers
     [Route("[controller]")]
     public class UsuarioController : Controller
     {
-        private readonly string _connectionString;
+        private readonly IUsuarioRepository _repository;
 
-        public UsuarioController(IConfiguration configuration)
+        public UsuarioController(IUsuarioRepository repository)
         {
-            _connectionString = configuration.GetConnectionString("DbConnection");
+            _repository = repository;
         }
 
         [HttpGet]
-        public IEnumerable<Usuario> GetAll()
+        public IActionResult GetAll()
         {
-            using (var sqlConnection = new SqlConnection(_connectionString))
-            {
-                const string sql = "SELECT * FROM Usuario";
-
-                var usuarios = sqlConnection.Query<Usuario>(sql);
-                
-                return usuarios;
-            }
+            var usuarios = _repository.GetAll();
+            
+            return Ok(usuarios);
         }
     }
 }

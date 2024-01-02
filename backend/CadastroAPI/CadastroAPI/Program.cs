@@ -1,8 +1,20 @@
+using CadastroAPI.Repository;
+using System.Data;
+using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddTransient<IDbConnection>(x =>
+    new SqlConnection(builder.Configuration.GetConnectionString("DbConnection"))
+);
+
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
