@@ -1,4 +1,4 @@
-namespace CadastroAPI.Models
+namespace CadastroAPI.Entities
 {
     public class Usuario
     {
@@ -11,9 +11,8 @@ namespace CadastroAPI.Models
 
         protected Usuario() {}
 
-        public Usuario(int idUsuario, string nome, string sobrenome, string email, DateTime dataNascimento, int idEscolaridade)
+        public Usuario(string nome, string sobrenome, string email, DateTime dataNascimento, int idEscolaridade)
         {
-            IdUsuario = idUsuario;
             Nome = nome;
             Sobrenome = sobrenome;
             Email = email;

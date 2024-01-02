@@ -1,7 +1,7 @@
-﻿using CadastroAPI.Models;
+﻿using CadastroAPI.Entities;
 using Dapper;
+using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace CadastroAPI.Repository
 {
@@ -12,30 +12,93 @@ namespace CadastroAPI.Repository
         public UsuarioRepository(IDbConnection dbConnection) 
         {
             _dbConnection = dbConnection;
+        }
+
+        public Task<int> Create(Usuario usuario)
+        {
+            var parameters = new {
+                usuario.Nome,
+                usuario.Sobrenome,
+                usuario.Email,
+                usuario.DataNascimento,
+                usuario.IdEscolaridade
+            };
+
+            const string sql = @"
+                INSERT INTO Usuario OUTPUT INSERTED.IdUsuario
+                VALUES (@Nome, @Sobrenome, @Email, @DataNascimento, @IdEscolaridade)";
+
+            var id = _dbConnection.ExecuteScalarAsync<int>(sql, parameters);
+
+            return id;
         } 
 
-        public void Delete(Usuario usuario)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Usuario Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Usuario> GetAll()
+        public async Task<IEnumerable<Usuario>> GetAll()
         {
             const string sql = "SELECT * FROM Usuario";
 
-            var usuarios = _dbConnection.Query<Usuario>(sql);
+            var usuarios = await _dbConnection.QueryAsync<Usuario>(sql);
 
             return usuarios;
         }
 
-        public int Update(Usuario usuario)
+        public async Task<Usuario> GetById(int id)
         {
-            throw new NotImplementedException();
+            var parameters = new { id };
+
+            const string sql = @"
+                SELECT * FROM Usuario
+                WHERE IdUsuario = @id";
+
+            var usuario = await _dbConnection.QuerySingleOrDefaultAsync<Usuario>(sql, parameters);
+
+            return usuario;
+        }
+
+        public async Task<bool> Update(int id, Usuario usuario)
+        {
+            var parameters = new {
+                id,
+                usuario.Nome,
+                usuario.Sobrenome,
+                usuario.Email,
+                usuario.DataNascimento,
+                usuario.IdEscolaridade
+            };
+
+            const string sql = @"
+                UPDATE Usuario 
+                SET Nome = @Nome, 
+                    Sobrenome = @Sobrenome, 
+                    Email = @Email, 
+                    DataNascimento = @DataNascimento, 
+                    IdEscolaridade = @IdEscolaridade 
+                WHERE IdUsuario = @id";
+
+            var result = await _dbConnection.ExecuteAsync(sql, parameters);
+
+            if(result != 1)
+                return false;
+            
+            return true;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var parameters = new {
+                id
+            };
+
+            const string sql = @"
+                DELETE Usuario
+                WHERE IdUsuario = @id";
+            
+            var result = await _dbConnection.ExecuteAsync(sql, parameters);
+
+            if(result != 1)
+                return false;
+            
+            return true;
         }
     }
 }

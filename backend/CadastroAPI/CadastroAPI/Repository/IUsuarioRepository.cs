@@ -1,15 +1,17 @@
-﻿using CadastroAPI.Models;
+﻿using CadastroAPI.Entities;
 
 namespace CadastroAPI.Repository
 {
     public interface IUsuarioRepository
     {
-        IEnumerable<Usuario> GetAll();
+        Task<int> Create(Usuario usuario);
 
-        Usuario Get(int id);
+        Task<IEnumerable<Usuario>> GetAll();
+
+        Task<Usuario> GetById(int id);
         
-        int Update(Usuario usuario);
+        Task<bool> Update(int id, Usuario usuario);
 
-        void Delete(Usuario usuario);
+        Task<bool> Delete(int id);
     }
 }
