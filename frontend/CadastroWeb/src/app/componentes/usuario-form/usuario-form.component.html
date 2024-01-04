@@ -22,7 +22,9 @@
             <div class="input-div">
                 <mat-form-field>
                     <mat-label for="">Email</mat-label>
-                    <input matInput type="text" formControlName="email" placeholder="Insira o email" maxlength="20" required>
+                    <input matInput type="email" formControlName="email" placeholder="Insira o email" maxlength="20" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="usuarioForm.hasError('email') && !usuarioForm.hasError('required')">Error</mat-error>
+                    <mat-error *ngIf="usuarioForm.hasError('required')">Email is <strong>required</strong></mat-error>
                 </mat-form-field>
             </div>
             
@@ -38,14 +40,8 @@
             <div class="input-div">
                 <mat-form-field>
                     <mat-label for="">Escolaridade</mat-label>
-                    <mat-select [(ngModel)]="selected" id="idEscolaridade" formControlName="idEscolaridade" required>
-                        
+                    <mat-select name="idEscolaridade" [(ngModel)]="selected" (closed)="change(selected)" formControlName="idEscolaridade" required>
                         <mat-option *ngFor="let option of niveisEscolares" [value]="option.idEscolaridade">{{ option.escolaridade }}</mat-option>
-                          
-                        <!--<mat-option value="1">Infantil</mat-option>
-                        <mat-option value="2">Fundamental</mat-option>
-                        <mat-option value="3">Médio</mat-option>
-                        <mat-option value="4">Superior</mat-option>-->
                     </mat-select>
                 </mat-form-field>
             </div>

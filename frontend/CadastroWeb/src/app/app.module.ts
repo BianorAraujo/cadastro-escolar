@@ -54,7 +54,7 @@ import { ExcluirComponent } from './componentes/excluir/excluir.component';
     MatDialogModule
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent]
 })
