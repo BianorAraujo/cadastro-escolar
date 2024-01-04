@@ -1,5 +1,4 @@
 ﻿using CadastroAPI.Entities;
-using CadastroAPI.Models;
 using CadastroAPI.Repository;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -19,102 +18,105 @@ namespace CadastroAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<Usuario>>>> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Usuario))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAll()
         {
-            ServiceResponse<IEnumerable<Usuario>> response = new ServiceResponse<IEnumerable<Usuario>>();
-
             try
             {
-                response.Dados = await _repository.GetAll();
+                var usuarios = await _repository.GetAll();
 
-                if (response.Dados == null)
-                {
-                    response.Mensagem = "Nenhum dado encontrado!";
-                }
+                if (usuarios != null)
+                    return Ok(usuarios);
+                else
+                    return NotFound();
             }
             catch (Exception ex)
             {
-                response.Mensagem = ex.Message;
-                response.Sucesso = false;
+                return BadRequest(ex.Message);
             }
-
-            return Ok(response);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<Usuario>>> GetById(int id)
-        {
-            ServiceResponse<Usuario> response = new ServiceResponse<Usuario>();
-
-            try
-            {
-                response.Dados = await _repository.GetById(id);
-            }
-            catch (Exception ex)
-            {
-                response.Mensagem = ex.Message;
-                response.Sucesso = false;
-            }
-
-            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<int>>> Create(Usuario model)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Create(Usuario model)
         {
-            ServiceResponse<int> response = new ServiceResponse<int>();
-
             try
             {
-                //var usuario = new Usuario(model.Nome, model.Sobrenome, model.Email, model.DataNascimento, model.IdEscolaridade);
+                var id = await _repository.Create(model);
 
-                response.Dados = await _repository.Create(model);
+                return Ok(id);
             }
             catch (Exception ex)
             {
-                response.Mensagem = ex.Message;
-                response.Sucesso = false;
+                return BadRequest(ex.Message);
             }
+        }
 
-            return Ok(response);
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Usuario))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var usuarios = await _repository.GetById(id);
+
+                if (usuarios != null)
+                    return Ok(usuarios);
+                else
+                    return NotFound();
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
-        public async Task<ActionResult<ServiceResponse<Usuario>>> Update(Usuario model)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Update(Usuario model)
         {
-            ServiceResponse<Usuario> response = new ServiceResponse<Usuario>();
-
-            //var usuario = new Usuario(model.Nome, model.Sobrenome, model.Email, model.DataNascimento, model.IdEscolaridade);
-
             try
             {
                 var result = await _repository.Update(model);
+
+                if(result)
+                    return Ok();
+                else
+                    return NoContent();
             }
             catch (Exception ex)
             {
-                response.Mensagem = ex.Message;
-                response.Sucesso = false;
+                return BadRequest(ex.Message);
             }
-
-            return Ok(response);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<Usuario>>> Delete(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Delete(int id)
         {
-            ServiceResponse<Usuario> response = new ServiceResponse<Usuario>();
-
             try
             {
                 var result = await _repository.Delete(id);
+
+                if(result)
+                    return Ok();
+                else
+                    return NoContent();
             }
             catch (Exception ex)
             {
-                response.Mensagem = ex.Message;
-                response.Sucesso = false;
+                return BadRequest(ex.Message);
             }
-
-            return Ok(response);
         }
 
     }

@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
-import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Usuario } from '../../models/Usuario';
 
@@ -15,8 +14,7 @@ export class ExcluirComponent implements OnInit {
   usuario!: Usuario;
 
   constructor(
-    private usuarioService: UsuarioService, 
-    private router: Router, 
+    private usuarioService: UsuarioService,
     @Inject(MAT_DIALOG_DATA) public data: any, 
     private ref: MatDialogRef<ExcluirComponent>
     ){}
@@ -26,7 +24,7 @@ export class ExcluirComponent implements OnInit {
     this.inputData = this.data;
 
     this.usuarioService.GetUsuario(this.inputData.id).subscribe((data) => {
-      this.usuario = data.dados;
+      this.usuario = data;
     });
   }
 

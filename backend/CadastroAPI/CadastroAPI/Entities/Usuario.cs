@@ -8,8 +8,11 @@ namespace CadastroAPI.Entities
         public string Email { get; set; }  = string.Empty;
         public DateTime DataNascimento { get; set; }
         public int IdEscolaridade { get; set; }
+        public List<HistoricoEscolar> Historicos { get; set; }
 
-        protected Usuario() {}
+        protected Usuario() {
+            Historicos = new List<HistoricoEscolar>();
+        }
 
         public Usuario(string nome, string sobrenome, string email, DateTime dataNascimento, int idEscolaridade)
         {
@@ -18,6 +21,7 @@ namespace CadastroAPI.Entities
             Email = email;
             DataNascimento = dataNascimento;
             IdEscolaridade = idEscolaridade;
+            Historicos = new List<HistoricoEscolar>();
         }
     }
 }

@@ -13,7 +13,7 @@ export class EscolaridadeService {
 
   constructor(private http: HttpClient) { }
 
-  GetEscolaridade() : Observable<NivelEscolar[]>{
+  GetEscolaridades() : Observable<NivelEscolar[]>{
     return this.http.get<NivelEscolar[]>(this.apiUrl);
   }
 

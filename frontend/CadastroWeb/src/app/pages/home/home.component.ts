@@ -20,14 +20,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioService.GetUsuarios().subscribe(data => {
-      const dados = data.dados;
+      const dados = data;
 
       dados.map((item) => {
         item.dataNascimento = new Date(item.dataNascimento!).toLocaleDateString('pt-BR');
       })
 
-      this.usuarios = data.dados;
-      this.usuariosGeral = data.dados;
+      this.usuarios = data;
+      this.usuariosGeral = data;
 
       console.log(this.usuarios);
     });

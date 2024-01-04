@@ -1,3 +1,5 @@
+import { HistoricoEscolar } from "./HistoricoEscolar";
+
 export interface Usuario{
     idUsuario?: number;
     nome: string;
@@ -5,4 +7,5 @@ export interface Usuario{
     email: string;
     dataNascimento: string;
     idEscolaridade: number;
+    historicos: HistoricoEscolar[];
 }

@@ -43,15 +43,52 @@ namespace CadastroAPI.Repository
 
         public async Task<Usuario> GetById(int id)
         {
-            var parameters = new { id };
-
             const string sql = @"
-                SELECT * FROM Usuario
-                WHERE IdUsuario = @id";
+                SELECT
+                    u.IdUsuario,
+                    u.Nome,
+                    u.Sobrenome,
+                    u.Email,
+                    u.DataNascimento,
+                    u.IdEscolaridade,
+                    h.IdHistoricoEscolar,
+                    h.Formato,
+                    h.Nome
+                FROM Usuario u
+                LEFT JOIN UsuarioHistoricoEscolar uh 
+                    ON u.IdUsuario = uh.IdUsuario
+                LEFT JOIN HistoricoEscolar h
+                    ON uh.IdHistoricoEscolar = h.IdHistoricoEscolar
+                WHERE
+                    u.IdUsuario = @id";
 
-            var usuario = await _dbConnection.QuerySingleOrDefaultAsync<Usuario>(sql, parameters);
+            Dictionary<int, Usuario> responseDictionary = new();
 
-            return usuario;
+            var usuarios = await _dbConnection.QueryAsync<Usuario, HistoricoEscolar, Usuario>(
+                sql,
+                (usuario, historico) => 
+                {
+                    if(responseDictionary.TryGetValue(usuario.IdUsuario, out var existingUsuario))
+                    {
+                        usuario = existingUsuario;
+                    }
+                    else{
+                        responseDictionary.Add(usuario.IdUsuario, usuario);
+                    }
+
+                    usuario.Historicos.Add(historico);
+
+                    return usuario;
+                },
+                new {
+                    id
+                },
+                splitOn: "IdHistoricoEscolar"
+            );
+
+            var usuarioResponse = responseDictionary[id];
+
+            return usuarioResponse;
         }
 
         public async Task<bool> Update(Usuario usuario)

@@ -27,7 +27,7 @@ export class UsuarioFormComponent implements OnInit {
     const currentYear = new Date().getFullYear();
     this.maxDate = new Date(currentYear - 15, 1, 1);
 
-    this.escolaridadeService.GetEscolaridade().subscribe((data) => {
+    this.escolaridadeService.GetEscolaridades().subscribe((data) => {
       this.niveisEscolares = data;
     })
 
@@ -44,9 +44,7 @@ export class UsuarioFormComponent implements OnInit {
   }
 
   submit(){
-    var dados = this.usuarioForm.value.idEscolaridade = this.selected;
-
-    console.log(this.selected);
+    this.usuarioForm.value.idEscolaridade = this.selected;
 
     this.onSubmit.emit(this.usuarioForm.value);
   }
