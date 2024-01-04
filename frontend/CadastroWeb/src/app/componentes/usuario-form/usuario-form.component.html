@@ -1,0 +1,59 @@
+<mat-card>
+    <div *ngIf="niveisEscolares">
+        <h1>{{ btnTitulo }}</h1>
+
+        <form [formGroup]="usuarioForm" (ngSubmit)="submit()" #formDit="ngForm">
+            <input type="hidden" value="" formControlName="idUsuario">
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Nome</mat-label>
+                    <input matInput type="text" formControlName="nome" placeholder="Insira o nome" maxlength="20" required>
+                </mat-form-field>
+            </div>
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Sobrenome</mat-label>
+                    <input matInput type="text" formControlName="sobrenome" placeholder="Insira o sobrenome" maxlength="20" required>
+                </mat-form-field>
+            </div>
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Email</mat-label>
+                    <input matInput type="text" formControlName="email" placeholder="Insira o email" maxlength="20" required>
+                </mat-form-field>
+            </div>
+            
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label>Data de Nascimento</mat-label>
+                    <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="dataNascimento" placeholder="DD/MM/YYY" required>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Escolaridade</mat-label>
+                    <mat-select [(ngModel)]="selected" id="idEscolaridade" formControlName="idEscolaridade" required>
+                        
+                        <mat-option *ngFor="let option of niveisEscolares" [value]="option.idEscolaridade">{{ option.escolaridade }}</mat-option>
+                          
+                        <!--<mat-option value="1">Infantil</mat-option>
+                        <mat-option value="2">Fundamental</mat-option>
+                        <mat-option value="3">Médio</mat-option>
+                        <mat-option value="4">Superior</mat-option>-->
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="btn-div">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!usuarioForm.valid">{{ btnAcao }}</button>
+                <button mat-raised-button routerLink="">Voltar</button>
+            </div>
+        </form>
+    </div>
+</mat-card>

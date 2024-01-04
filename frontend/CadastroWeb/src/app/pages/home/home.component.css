@@ -1,0 +1,18 @@
+.header-div{
+    display: flex;
+    flex-direction: row;
+}
+
+.header-div button{
+    height: 56px;
+    margin-right: 1rem;
+}
+
+mat-card{
+    align-items: flex-start;
+
+}
+
+td button{
+    margin: 4px 4px 0px 0px;
+}

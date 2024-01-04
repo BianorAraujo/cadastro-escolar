@@ -1,6 +1,5 @@
 ﻿using CadastroAPI.Entities;
 using Dapper;
-using System.ComponentModel;
 using System.Data;
 
 namespace CadastroAPI.Repository
@@ -55,10 +54,10 @@ namespace CadastroAPI.Repository
             return usuario;
         }
 
-        public async Task<bool> Update(int id, Usuario usuario)
+        public async Task<bool> Update(Usuario usuario)
         {
             var parameters = new {
-                id,
+                usuario.IdUsuario,
                 usuario.Nome,
                 usuario.Sobrenome,
                 usuario.Email,
@@ -73,7 +72,7 @@ namespace CadastroAPI.Repository
                     Email = @Email, 
                     DataNascimento = @DataNascimento, 
                     IdEscolaridade = @IdEscolaridade 
-                WHERE IdUsuario = @id";
+                WHERE IdUsuario = @IdUsuario";
 
             var result = await _dbConnection.ExecuteAsync(sql, parameters);
 

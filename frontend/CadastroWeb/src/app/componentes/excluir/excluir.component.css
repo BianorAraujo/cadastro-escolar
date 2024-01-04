@@ -1,0 +1,23 @@
+h2{
+    text-align: center;
+    justify-content: flex-start;
+}
+
+button{
+    margin: 8px 8px 0px 0px;
+}
+
+p{
+    text-align: center;
+}
+
+mat-card{
+    width: 90%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 1.5rem;
+}

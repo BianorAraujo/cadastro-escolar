@@ -1,0 +1,15 @@
+<mat-card>
+    <div *ngIf="usuario">
+        <!-- <h2>Confirmar exclusão</h2> -->
+
+        <div>
+            <h3>Deseja excluir o usuário:</h3>
+            <p>{{ usuario.nome }} {{ usuario.sobrenome }}</p>
+        </div>
+
+        <div>
+            <button mat-raised-button color="warn" (click)="excluir()">Confirmar</button>
+            <button mat-raised-button (click)="cancelar()">Voltar</button>
+        </div>
+    </div>
+</mat-card>

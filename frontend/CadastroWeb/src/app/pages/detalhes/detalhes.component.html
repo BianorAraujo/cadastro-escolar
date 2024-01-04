@@ -1,0 +1,54 @@
+<mat-card>
+    <h1>Detalhes do Usuário</h1>
+
+    <div *ngIf="usuario">
+        <form action="">
+            <input type="hidden" value="{{ usuario.idUsuario }}">
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Nome</mat-label>
+                    <input matInput type="text" value="{{ usuario.nome }}" disabled>
+                </mat-form-field>
+            </div>
+
+            <!-- <div>
+                <label>Nome:</label>
+                <input type="text" value="{{ usuario.nome }}" disabled>
+            </div> -->
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Sobrenome</mat-label>
+                    <input matInput type="text" value="{{ usuario.sobrenome }}" disabled>
+                </mat-form-field>
+            </div>
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Email</mat-label>
+                    <input matInput type="text" value="{{ usuario.email }}" disabled>
+                </mat-form-field>
+            </div>
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Data Nascimento</mat-label>
+                    <input matInput type="text" value="{{ usuario.dataNascimento }}" disabled>
+                </mat-form-field>
+            </div>
+
+            <div class="input-div">
+                <mat-form-field>
+                    <mat-label for="">Escolaridade</mat-label>
+                    <input matInput type="text" value="{{ usuario.idEscolaridade }}" disabled>
+                </mat-form-field>
+            </div>
+
+            <div class="btn-div">
+                <button mat-raised-button color="warn">Excluir</button>
+                <button mat-raised-button routerLink="">Voltar</button>
+            </div>
+        </form>
+    </div>
+</mat-card>

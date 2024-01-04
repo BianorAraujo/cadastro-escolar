@@ -1,8 +1,8 @@
 export interface Usuario{
     idUsuario?: number;
-    Nome: string;
-    Sobrenome: string;
-    Email: string;
-    DataNascimento: string;
-    Departamento: number;
+    nome: string;
+    sobrenome: string;
+    email: string;
+    dataNascimento: string;
+    idEscolaridade: number;
 }

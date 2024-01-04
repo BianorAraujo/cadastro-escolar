@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    width: 100vw;
+    height: 100vh;
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    overflow: hidden;
+}
+
+mat-card{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 3rem;
+    margin-top: 2rem;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.input-div{
+    width: 500px;
+}
+
+.btn-div{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-div button {
+    width: 50%;
+}

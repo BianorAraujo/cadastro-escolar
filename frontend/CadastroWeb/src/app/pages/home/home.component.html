@@ -1,11 +1,63 @@
-<div>
-    <button>Novo Usuário</button>
-    <div>
-        <label>Procurar:</label>
-        <input type="text" placeholder="Buscar...">
-    </div>
-</div>
 
+<mat-card>
+    <div class="header-div">
+        <button mat-raised-button color="primary" routerLink="/cadastrar">Novo Usuário</button>
+        <div class="input-div">
+            <mat-form-field>
+                <mat-label>Buscar pelo nome</mat-label>
+                <input matInput type="text" (input)="search($event)">
+            </mat-form-field>
+        </div>
+    </div>
+
+
+    <table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="Nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.nome}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="Sobrenome">
+            <th mat-header-cell *matHeaderCellDef> Sobrenome </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.sobrenome}} </td>
+        </ng-container>
+    
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.email}} </td>
+        </ng-container>
+    
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="DataNascimento">
+            <th mat-header-cell *matHeaderCellDef> Data Nascimento </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.dataNascimento}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Escolaridade">
+            <th mat-header-cell *matHeaderCellDef> Escolaridade </th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.idEscolaridade}} </td>
+        </ng-container>
+            
+        <ng-container matColumnDef="Acoes">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let usuario">
+                <button mat-raised-button routerLink="/editar/{{ usuario.idUsuario }}">Editar</button>
+                <button mat-raised-button routerLink="/detalhes/{{ usuario.idUsuario }}">Detalhes</button>
+                <button mat-raised-button color="warn" (click)="openDialog(usuario.idUsuario)">Excluir</button>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+    </table>
+</mat-card>
+
+
+<!-- 
 <table class="table">
     <thead>
         <tr>
@@ -16,24 +68,25 @@
             <th>Escolaridade</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody *ngFor="let usuario of usuarios">
         <tr>
-            <td>Teste</td>
-            <td>Teste</td>
-            <td>Teste</td>
-            <td>Teste</td>
-            <td>Teste</td>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.sobrenome }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.dataNascimento }}</td>
+            <td>{{ usuario.idEscolaridade }}</td>
             <td>
-                <button>Editar</button>
+                <button routerLink="/editar/{{ usuario.idUsuario }}">Editar</button>
             </td>
             <td>
-                <button>Detalhes</button>
+                <button routerLink="/detalhes/{{ usuario.idUsuario }}">Detalhes</button>
             </td>
             <td>
                 <button>Excluir</button>
             </td>
         </tr>
     </tbody>
-</table>
+</table> -->

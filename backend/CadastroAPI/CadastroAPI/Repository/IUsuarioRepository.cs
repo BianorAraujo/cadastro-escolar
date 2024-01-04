@@ -10,7 +10,7 @@ namespace CadastroAPI.Repository
 
         Task<Usuario> GetById(int id);
         
-        Task<bool> Update(int id, Usuario usuario);
+        Task<bool> Update(Usuario usuario);
 
         Task<bool> Delete(int id);
     }

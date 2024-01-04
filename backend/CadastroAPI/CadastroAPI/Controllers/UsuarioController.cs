@@ -8,7 +8,7 @@ namespace CadastroAPI.Controllers
 {
     [ApiController]
     [EnableCors("OpenCORSPolicy")]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepository _repository;
@@ -79,8 +79,8 @@ namespace CadastroAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ServiceResponse<Usuario>>> Update(int id, Usuario model)
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<Usuario>>> Update(Usuario model)
         {
             ServiceResponse<Usuario> response = new ServiceResponse<Usuario>();
 
@@ -88,7 +88,7 @@ namespace CadastroAPI.Controllers
 
             try
             {
-                var result = await _repository.Update(id, model);
+                var result = await _repository.Update(model);
             }
             catch (Exception ex)
             {

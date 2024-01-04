@@ -10,9 +10,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(
         name: "OpenCORSPolicy",
-        builder =>
+        x =>
         {
-            builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+            x.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
         });
 });
 
@@ -23,6 +23,7 @@ builder.Services.AddTransient<IDbConnection>(x =>
 );
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IEscolaridadeRepository, EscolaridadeRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
