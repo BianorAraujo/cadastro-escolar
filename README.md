@@ -21,4 +21,4 @@ docker-compose -f compose.yaml up --build -d
 
 ## Imagens
 
-[https://github.com/BianorAraujo/cadastro-escolar/blob/main/demo/demo.mov](https://github.com/BianorAraujo/cadastro-escolar/blob/main/demo/demo.mov)
+https://github.com/BianorAraujo/cadastro-escolar/blob/main/demo/demo.mov
