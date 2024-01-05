@@ -24,26 +24,26 @@ docker-compose -f compose.yaml up --build -d
 ### Home
 
 <div align="center">
-  <img src="./img/home.png" width="400px">
+  <img src="./img/home.png">
 </div>
 
 
 ### Cadastrar
 
 <div align="center">
-  <img src="./img/cadastro.png" width="400px">
+  <img src="./img/cadastro.png">
 </div>
 
 
 ### Editar
 
 <div align="center">
-  <img src="./img/editar.png" width="400px">
+  <img src="./img/editar.png">
 </div>
 
 
 ### Histórico
 
 <div align="center">
-  <img src="./img/historico.png" width="400px">
+  <img src="./img/historico.png">
 </div>
