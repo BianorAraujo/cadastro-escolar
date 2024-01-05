@@ -21,7 +21,4 @@ docker-compose -f compose.yaml up --build -d
 
 ## Imagens
 
-<div align="center">
-  <img src="./demo/demo.mov" width="200px">
-  <h1>Project name</h1>
-</div>
+https://github.com/BianorAraujo/cadastro-escolar/blob/main/demo/demo.mov
