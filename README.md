@@ -21,4 +21,29 @@ docker-compose -f compose.yaml up --build -d
 
 ## Imagens
 
-https://github.com/BianorAraujo/cadastro-escolar/blob/main/demo/demo.mov
+### Home
+
+<div align="center">
+  <img src="./img/home.png" width="400px">
+</div>
+
+
+### Cadastrar
+
+<div align="center">
+  <img src="./img/cadastro.png" width="400px">
+</div>
+
+
+### Editar
+
+<div align="center">
+  <img src="./img/editar.png" width="400px">
+</div>
+
+
+### Histórico
+
+<div align="center">
+  <img src="./img/historico.png" width="400px">
+</div>
