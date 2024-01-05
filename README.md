@@ -1,11 +1,16 @@
 # cadastro-escolar
-App criada para validação técnica
+Aplicação para cadastro de usuários e seus hitóricos escolares.
+Desenvolvida para validação técnica.
+
 
 ## Tecnologias
 
-* Angular 16
+* Angular JS 16
+* Angular Material
 * .NET 6.0
+* Dapper
 * SQL Server
+* Docker
 
 
 ## Como iniciar
@@ -18,6 +23,7 @@ Execute o seguinte comando:
 ```
 docker-compose -f compose.yaml up --build -d
 ```
+
 
 ## Imagens
 
