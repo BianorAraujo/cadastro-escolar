@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
 
       this.usuarios = data;
       this.usuariosGeral = data;
-      this.hasUsuarios = this.usuarios != null;
+      this.hasUsuarios = this.usuarios != null && this.usuarios.length != 0;
     });
   }
 

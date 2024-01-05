@@ -28,6 +28,8 @@ import { ExcluirComponent } from './componentes/excluir/excluir.component';
 import { HistoricoComponent } from './pages/historico/historico.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UploadComponent } from './componentes/upload/upload.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { UploadComponent } from './componentes/upload/upload.component';
     MatIconModule
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

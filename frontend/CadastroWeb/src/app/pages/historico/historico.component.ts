@@ -33,9 +33,11 @@ export class HistoricoComponent implements OnInit{
   ngOnInit(): void {
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log(this.id);
     
     this.usuarioService.GetUsuario(this.id).subscribe((data) => {
       
+      console.log(data);
       const dados = data;
       dados.dataNascimento = new Date(dados.dataNascimento).toLocaleDateString('pt-BR');
 
@@ -44,9 +46,11 @@ export class HistoricoComponent implements OnInit{
       this.escolaridadeService.GetEscolaridades().subscribe((nivel) => {
         var result = nivel.find((obj) => obj.idEscolaridade == this.usuario?.idEscolaridade);
         this.nivelEscolar = result?.escolaridade;
-      });
+    });
 
-      this.hasHistoricos = this.usuario.historicos[0] != null;
+    console.log(this.usuario);
+
+    this.hasHistoricos = this.usuario.historicos[0] != null;
 
       if (this.hasHistoricos){
         this.historicos = this.usuario.historicos;

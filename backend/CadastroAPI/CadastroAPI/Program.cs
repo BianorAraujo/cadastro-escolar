@@ -1,7 +1,6 @@
 using CadastroAPI.Repository;
 using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.CompilerServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +20,12 @@ builder.Services.AddControllers();
 builder.Services.AddTransient<IDbConnection>(x =>
     new SqlConnection(builder.Configuration.GetConnectionString("DbConnection"))
 );
+
+IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                                                                         .AddJsonFile("appsettings.json")
+                                                                         .Build();
+builder.Services.AddOptions();
+builder.Services.Configure<Config>(configuration.GetSection("Config"));
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IEscolaridadeRepository, EscolaridadeRepository>();

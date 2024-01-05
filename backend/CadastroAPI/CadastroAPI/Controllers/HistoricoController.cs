@@ -2,6 +2,7 @@ using CadastroAPI.Entities;
 using CadastroAPI.Repository;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace CadastroAPI.Controllers
 {
@@ -11,11 +12,14 @@ namespace CadastroAPI.Controllers
     public class HistoricoController : Controller
     {
         private readonly IHistoricoRepository _repository;
-        private const string PathDirectory = "Resources/Historicos";
+        private readonly IOptions<Config> _config;
+        private string PathDirectory;
 
-        public HistoricoController(IHistoricoRepository repository)
+        public HistoricoController(IHistoricoRepository repository, IOptions<Config> config)
         {
             _repository = repository;
+            _config = config;
+            PathDirectory = _config.Value.pathName;
         }
 
         [HttpPost, DisableRequestSizeLimit]
@@ -33,6 +37,10 @@ namespace CadastroAPI.Controllers
                     var fileName = file.FileName;
                     var filePath = Path.Combine(PathDirectory, fileName);
                     
+                    if (!Directory.Exists(PathDirectory))
+                        Directory.CreateDirectory(PathDirectory);
+
+
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         file.CopyTo(stream);
@@ -113,7 +121,7 @@ namespace CadastroAPI.Controllers
                     return Ok();
                 }
                 else
-                    return NotFound();
+                    return NotFound(filePath);
 
             }
             catch (Exception ex)
