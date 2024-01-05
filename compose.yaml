@@ -20,7 +20,8 @@ services:
       context: ./database
       dockerfile: Dockerfile
     container_name: azure-sql-server-cmd
-    command: /bin/bash -c 'sleep 10; /opt/mssql-tools/bin/sqlcmd -S azure-sql-server -U sa -P Password123 -i dbinit.sql'
+    command: /bin/bash -c '/opt/mssql-tools/bin/sqlcmd -S azure-sql-server -U sa -P Password123 -i dbinit.sql'
+    restart: on-failure
     networks:
       - minha-rede
     depends_on: 
@@ -32,8 +33,6 @@ services:
       context: ./backend/CadastroAPI/CadastroAPI
       dockerfile: Dockerfile
     container_name: cadastro-web-api
-    # depends_on:
-    #   - sql-server
     ports:
       - "5047:80"
     networks:
