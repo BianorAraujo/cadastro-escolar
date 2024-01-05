@@ -5,7 +5,7 @@ Desenvolvida para validação técnica.
 
 ## Tecnologias
 
-* Angular JS 16
+* Angular 16
 * Angular Material
 * .NET 6.0
 * Dapper
