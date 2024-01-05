@@ -24,6 +24,11 @@ Execute o seguinte comando:
 docker-compose -f compose.yaml up --build -d
 ```
 
+Acessar pelo link
+```
+http://localhost:4200
+```
+
 
 ## Imagens
 
