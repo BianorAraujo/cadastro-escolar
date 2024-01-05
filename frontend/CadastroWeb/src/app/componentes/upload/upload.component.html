@@ -1,0 +1,10 @@
+<mat-card>
+    <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Choose File</button>
+    <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+    <span class="file-name">{{selectedFile?.name}}</span>
+    
+    <div clas="button-div">
+        <button mat-raised-button color="primary" (click)="salvar()" [disabled]="!selectedFile">Salvar</button>
+        <button mat-raised-button (click)="cancelar()">Voltar</button>
+    </div>
+</mat-card>

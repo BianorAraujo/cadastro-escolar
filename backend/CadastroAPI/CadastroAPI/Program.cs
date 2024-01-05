@@ -24,6 +24,7 @@ builder.Services.AddTransient<IDbConnection>(x =>
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IEscolaridadeRepository, EscolaridadeRepository>();
+builder.Services.AddScoped<IHistoricoRepository, HistoricoRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

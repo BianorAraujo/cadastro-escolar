@@ -15,14 +15,14 @@
             <div class="input-div">
                 <mat-form-field>
                     <mat-label for="">Sobrenome</mat-label>
-                    <input matInput type="text" formControlName="sobrenome" placeholder="Insira o sobrenome" maxlength="20" required>
+                    <input matInput type="text" formControlName="sobrenome" placeholder="Insira o sobrenome" maxlength="100" required>
                 </mat-form-field>
             </div>
 
             <div class="input-div">
                 <mat-form-field>
                     <mat-label for="">Email</mat-label>
-                    <input matInput type="email" formControlName="email" placeholder="Insira o email" maxlength="20" [errorStateMatcher]="matcher" required>
+                    <input matInput type="email" formControlName="email" placeholder="Insira o email" maxlength="50" [errorStateMatcher]="matcher" required>
                     <mat-error *ngIf="usuarioForm.hasError('email') && !usuarioForm.hasError('required')">Error</mat-error>
                     <mat-error *ngIf="usuarioForm.hasError('required')">Email is <strong>required</strong></mat-error>
                 </mat-form-field>
@@ -32,6 +32,7 @@
                 <mat-form-field>
                     <mat-label>Data de Nascimento</mat-label>
                     <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="dataNascimento" placeholder="DD/MM/YYY" required>
+                    <mat-hint>Precisa ser maior de 15 anos</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>

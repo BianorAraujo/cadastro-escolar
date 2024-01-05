@@ -1,0 +1,23 @@
+
+.input-div{
+    margin: 8px 4px;
+}
+
+.mat-column-Nome{
+    width: 600px;
+}
+
+.btn-table{
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem 0rem 1rem 0rem;
+
+}
+
+.table-nocontent{
+    margin-top: 2rem;
+}
+
+td button{
+    margin: 8px;
+}

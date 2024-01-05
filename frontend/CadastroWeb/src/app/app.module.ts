@@ -25,6 +25,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ExcluirComponent } from './componentes/excluir/excluir.component';
+import { HistoricoComponent } from './pages/historico/historico.component';
+import { MatIconModule } from '@angular/material/icon';
+import { UploadComponent } from './componentes/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { ExcluirComponent } from './componentes/excluir/excluir.component';
     UsuarioFormComponent,
     EditarComponent,
     DetalhesComponent,
-    ExcluirComponent
+    ExcluirComponent,
+    HistoricoComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ import { ExcluirComponent } from './componentes/excluir/excluir.component';
     MatNativeDateModule,
     MatTableModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}

@@ -13,7 +13,7 @@ namespace CadastroAPI.Repository
             _dbConnection = dbConnection;
         }
 
-        public Task<int> Create(Usuario usuario)
+        public async Task<int> Create(Usuario usuario)
         {
             var parameters = new {
                 usuario.Nome,
@@ -27,7 +27,7 @@ namespace CadastroAPI.Repository
                 INSERT INTO Usuario OUTPUT INSERTED.IdUsuario
                 VALUES (@Nome, @Sobrenome, @Email, @DataNascimento, @IdEscolaridade)";
 
-            var id = _dbConnection.ExecuteScalarAsync<int>(sql, parameters);
+            var id = await _dbConnection.ExecuteScalarAsync<int>(sql, parameters);
 
             return id;
         } 
