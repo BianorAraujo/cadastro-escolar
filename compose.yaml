@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Banco de Dados SQL Server
+  sql-server:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: azure-sql-server
+    environment:
+      MSSQL_SA_PASSWORD: "Password123"
+      ACCEPT_EULA: "1"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql
+    networks:
+      - minha-rede
+  
+  sql-server-cmd:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: azure-sql-server-cmd
+    command: /bin/bash -c 'sleep 10; /opt/mssql-tools/bin/sqlcmd -S azure-sql-server -U sa -P Password123 -i dbinit.sql'
+    networks:
+      - minha-rede
+    depends_on: 
+      - sql-server
+
+  # API .NET 6.0
+  web-api:
+    build:
+      context: ./backend/CadastroAPI/CadastroAPI
+      dockerfile: Dockerfile
+    container_name: cadastro-web-api
+    # depends_on:
+    #   - sql-server
+    ports:
+      - "5047:80"
+    networks:
+      - minha-rede
+
+  # Aplicação Angular 16
+  angular-app:
+    build:
+      context: ./frontend/CadastroWeb
+      dockerfile: Dockerfile
+    container_name: cadastro-web-app
+    ports:
+      - "4200:80"
+    networks:
+      - minha-rede
+
+volumes:
+  sqlvolume:
+
+networks:
+  minha-rede:
+    driver: bridge
