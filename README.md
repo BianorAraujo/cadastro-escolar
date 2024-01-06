@@ -24,10 +24,16 @@ Execute o seguinte comando:
 docker-compose -f compose.yaml up --build -d
 ```
 
-Acessar pelo link:
+Acessar a aplicação web:
 ```
 http://localhost:4200
 ```
+
+Acessar a API:
+```
+http://localhost:5047/swagger/
+```
+
 
 
 ## Imagens
