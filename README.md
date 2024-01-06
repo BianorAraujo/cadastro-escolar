@@ -1,5 +1,5 @@
 # cadastro-escolar
-Aplicação para cadastro de usuários e seus hitóricos escolares.
+Aplicação para cadastro de usuários e seus históricos escolares.
 Desenvolvida para validação técnica.
 
 
