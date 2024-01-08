@@ -29,6 +29,7 @@ import { HistoricoComponent } from './pages/historico/historico.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UploadComponent } from './componentes/upload/upload.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -59,11 +60,13 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatTableModule,
     MatToolbarModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}
   ],
   bootstrap: [AppComponent]
 })
