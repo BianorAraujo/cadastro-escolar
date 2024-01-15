@@ -1,4 +1,4 @@
-# cadastro-escolar
+# Cadastro Escolar
 Aplicação para cadastro de usuários e seus históricos escolares.
 Desenvolvida para validação técnica.
 
