@@ -21,7 +21,7 @@ Clone o repositório e entre no diretório onde foi clonado.
 
 Execute o seguinte comando:
 ```
-docker-compose -f compose.yaml up --build -d
+docker compose -f compose.yaml up --build -d
 ```
 
 Acessar a aplicação web:
