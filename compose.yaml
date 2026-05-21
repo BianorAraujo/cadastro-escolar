@@ -1,10 +1,8 @@
-version: '3.9'
-
 services:
   # Banco de Dados SQL Server
   sql-server:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sql-server
+    container_name: bianor-academic-sql-server
     environment:
       ACCEPT_EULA: "1"
       MSSQL_SA_PASSWORD: "Password1!"
@@ -14,14 +12,15 @@ services:
       - sqlvolume:/var/opt/mssql
     networks:
       - minha-rede
-  
+
   # Executar os scripts iniciais
   sql-server-cmd:
+    image: bianor-academicapp-dbinit:latest
     build:
       context: ./database
       dockerfile: Dockerfile
-    container_name: sql-server-cmd
-    command: /bin/bash -c '/opt/mssql-tools/bin/sqlcmd -S sql-server -U sa -P Password1! -i /dbinit.sql'
+    container_name: bianor-academic-sql-server-cmd
+    command: /bin/bash -c '/opt/mssql-tools/bin/sqlcmd -S bianor-academic-sql-server -U sa -P Password1! -i /dbinit.sql'
     restart: on-failure
     networks:
       - minha-rede
@@ -30,10 +29,11 @@ services:
 
   # API .NET 6.0
   web-api:
+    image: bianor-academic-api:latest
     build:
       context: ./backend/CadastroAPI/CadastroAPI
       dockerfile: Dockerfile
-    container_name: cadastro-web-api
+    container_name: bianor-academic-api
     ports:
       - "5047:80"
     volumes:
@@ -45,10 +45,11 @@ services:
 
   # Aplicação Angular 16
   angular-app:
+    image: bianor-academic-web:latest
     build:
       context: ./frontend/CadastroWeb
       dockerfile: Dockerfile
-    container_name: cadastro-web-app
+    container_name: bianor-academic-web
     ports:
       - "4200:80"
     networks:

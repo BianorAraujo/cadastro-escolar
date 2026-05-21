@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class HistoricoService {
 
-  private apiUrl = `${environment.ApiUrl}/historico`
+  private apiUrl = `${environment.ApiUrl}/historico`;
   
   constructor(private http: HttpClient) { }
 
